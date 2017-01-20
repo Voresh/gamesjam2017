@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Abilities;
 using Assets.Abilities.Effects;
 using Assets.Units;
 using UnityEngine;
@@ -19,6 +21,8 @@ namespace Assets.Main
 
         [Header("temp")]
         [SerializeField]
+        private List<Ability> _turnAbilities = new List<Ability>();
+        [SerializeField]
         private List<Effect> _turnEffects = new List<Effect>();
         private List<Effect> _endedEffects = new List<Effect>();
 
@@ -28,25 +32,51 @@ namespace Assets.Main
             _currentLevel = _levels[0];
         }
 
-        public void Update ()
+        public void AddAbility(Ability ability)
         {
-		
+            if (!AbilityContains(ability))
+            {
+                _turnAbilities.Add(ability);
+            }
         }
 
-        public void AddEffect(GameObject effect)
+        public bool AbilityContains(Ability ability)
         {
-            Effect newEffect = Instantiate(effect).GetComponent<Effect>();
-            _turnEffects.Add(newEffect);
+            return Enumerable.Contains(_turnAbilities, ability);
+            /*
+            foreach (var currentAbility in _turnAbilities)
+            {
+                if (currentAbility.Equals(ability))
+                {
+                    return true;
+                }
+            }
+            return false;
+            */
         }
 
         public void NextTurn()
         {
+            AddEffectsFromAbilities();
+
             foreach (var effect in _turnEffects)
             {
                 effect.Apply();
             }
             //!!!
             EnemyEndedTurn();
+        }
+
+        private void AddEffectsFromAbilities()
+        {
+            foreach (var ability in _turnAbilities)
+            {
+                foreach (var effect in ability.Effects)
+                {
+                    _turnEffects.Add(effect);
+                }
+            }
+            _turnAbilities.Clear();
         }
 
         public void EnemyEndedTurn()

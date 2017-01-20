@@ -24,6 +24,18 @@ namespace Assets.Units
             }
         }
 
+        public void GetHeal(int amount)
+        {
+            if (_health + amount < _maxHealth)
+            {
+                _health += amount;
+            }
+            else
+            {
+                _health = _maxHealth;
+            }
+        }
+
         public void IncreaseStrength()
         {
 
