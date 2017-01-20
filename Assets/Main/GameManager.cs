@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Assets.Abilities.Effects;
+using UnityEngine;
 
 namespace Assets.Main
 {
@@ -11,7 +13,8 @@ namespace Assets.Main
         private Level _currentLevel;
         [Header("temp")]
         [SerializeField]
-        private Effect[] _turnEffects;
+        private List<Effect> _turnEffects = new List<Effect>();
+        private List<Effect> _nextTurnEffects = new List<Effect>();
 
         public void Awake ()
         {
@@ -23,9 +26,18 @@ namespace Assets.Main
 		
         }
 
-        public void nextTurn()
+        public void NextTurn()
         {
-
+            foreach (var effect in _turnEffects)
+            {
+                effect.Apply();
+                if (!effect.Ended())
+                {
+                    _nextTurnEffects.Add(effect);
+                }
+            }
+            _turnEffects = _nextTurnEffects;
+            _nextTurnEffects.Clear();
         }
     }
 }

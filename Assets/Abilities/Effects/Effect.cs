@@ -1,16 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Units;
 using UnityEngine;
 
-public class Effect : MonoBehaviour {
+namespace Assets.Abilities.Effects
+{
+    public abstract class Effect : MonoBehaviour
+    {
+        [SerializeField]
+        private int _turnsDuration = 1;
+        [SerializeField]
+        protected Unit _target;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public void Apply()
+        {
+            AddEffect();
+            _turnsDuration--;
+            if (!Ended())
+            {
+                RemoveEffect();
+            }
+        }
+
+        public bool Ended()
+        {
+            return _turnsDuration != 0;
+        }
+
+        protected abstract void AddEffect();
+
+        protected abstract void RemoveEffect();
+    }
 }

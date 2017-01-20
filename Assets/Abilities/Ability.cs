@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Abilities.Effects;
+using Assets.Units;
 using UnityEngine;
 
-public class Ability : MonoBehaviour {
+namespace Assets.Abilities
+{
+    public class Ability : MonoBehaviour
+    {
+        [SerializeField]
+        private Unit _abilityOwner;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        [SerializeField]
+        private Effect[] _effects;
+
+        public void UseAbility()
+        {
+
+        }
+    }
 }
