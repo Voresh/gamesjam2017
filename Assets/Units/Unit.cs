@@ -53,9 +53,14 @@ namespace Assets.Units
             UpdateHealthbar();
         }
 
-        public void IncreaseStrength()
+        public void IncreaseStrength(int amount)
         {
+            _strength += amount;
+        }
 
+        public void DecreaseStrength(int amount)
+        {
+            _strength -= amount;
         }
 
         public void IncreaseMagicStrength()

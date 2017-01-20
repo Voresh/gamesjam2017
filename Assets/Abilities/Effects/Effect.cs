@@ -9,10 +9,16 @@ namespace Assets.Abilities.Effects
         private int _turnsDuration = 1;
         [SerializeField]
         protected Unit Target;
+        [SerializeField]
+        protected bool _added;
 
         public void Apply()
         {
-            AddEffect();
+            if (!_added)
+            {
+                AddEffect();
+                _added = true;
+            }
             _turnsDuration--;
         }
 

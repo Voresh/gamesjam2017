@@ -24,6 +24,11 @@ namespace Assets.Abilities
 
         public void Awake()
         {
+
+        }
+
+        public void CreateEffects()
+        {
             foreach (var template in _effectsTemplates)
             {
                 _effects.Add(Instantiate(template).GetComponent<Effect>());

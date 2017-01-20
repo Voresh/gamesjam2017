@@ -32,6 +32,7 @@ namespace Assets.Abilities
                 ability.SetParent(canvas);
                 ability.anchoredPosition = _abilitiesPlaces[i];
                 _currentAbilities.Add(ability.GetComponent<Ability>());
+                ability.GetComponent<Ability>().CreateEffects();
             }
         }
 
