@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Assets.Main;
 using UnityEngine;
 
 namespace Assets.Units
@@ -17,6 +18,10 @@ namespace Assets.Units
         public void GetDamage(int damage)
         {
             _health -= damage;
+            if (_health <= 0)
+            {
+                Die();
+            }
         }
 
         public void IncreaseStrength()
@@ -27,6 +32,11 @@ namespace Assets.Units
         public void IncreaseMagicStrength()
         {
 
+        }
+
+        private void Die()
+        {
+            GameManager.Current.UnitDied(this);
         }
     }
 }

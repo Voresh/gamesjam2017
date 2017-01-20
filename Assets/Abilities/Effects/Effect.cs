@@ -14,15 +14,20 @@ namespace Assets.Abilities.Effects
         {
             AddEffect();
             _turnsDuration--;
-            if (!Ended())
+        }
+
+        public bool RemoveEffectIfEnded()
+        {
+            if (Ended())
             {
                 RemoveEffect();
             }
+            return Ended();
         }
 
-        public bool Ended()
+        private bool Ended()
         {
-            return _turnsDuration != 0;
+            return _turnsDuration == 0;
         }
 
         protected abstract void AddEffect();

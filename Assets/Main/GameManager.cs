@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Abilities.Effects;
+using Assets.Units;
 using UnityEngine;
 
 namespace Assets.Main
@@ -11,14 +12,21 @@ namespace Assets.Main
         [SerializeField]
         private Level[] _levels;
         private Level _currentLevel;
+        [SerializeField]
+        private Unit _hero;
+        [SerializeField]
+        private Unit _muse;
+
         [Header("temp")]
         [SerializeField]
         private List<Effect> _turnEffects = new List<Effect>();
-        private List<Effect> _nextTurnEffects = new List<Effect>();
+        [SerializeField]
+        private List<Effect> _endedEffects = new List<Effect>();
 
         public void Awake ()
         {
             Current = this;
+            _currentLevel = _levels[0];
         }
 
         public void Update ()
@@ -26,18 +34,56 @@ namespace Assets.Main
 		
         }
 
+        public void AddEffect(Effect effect)
+        {
+            _turnEffects.Add(effect);
+        }
+
         public void NextTurn()
         {
             foreach (var effect in _turnEffects)
             {
                 effect.Apply();
-                if (!effect.Ended())
+            }
+            //!!!
+            EnemyEndedTurn();
+        }
+
+        public void EnemyEndedTurn()
+        {
+            foreach (var effect in _turnEffects)
+            {
+                if (effect.RemoveEffectIfEnded())
                 {
-                    _nextTurnEffects.Add(effect);
+                    _endedEffects.Add(effect);
                 }
             }
-            _turnEffects = _nextTurnEffects;
-            _nextTurnEffects.Clear();
+            RemoveEndedEffects();
+        }
+
+        private void RemoveEndedEffects()
+        {
+            foreach (var effect in _endedEffects)
+            {
+                _turnEffects.Remove(effect);
+            }
+            _endedEffects.Clear();
+        }
+
+        public void UnitDied(Unit unit)
+        {
+            if (unit.gameObject.Equals(_currentLevel.Enemy.gameObject))
+            {
+                Debug.Log("victory");
+            }
+            else if (unit == _muse)
+            {
+                //?
+            }
+            else if (unit == _hero)
+            {
+                //defeated
+            }
         }
     }
 }

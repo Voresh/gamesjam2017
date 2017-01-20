@@ -7,5 +7,10 @@ namespace Assets.Main
     {
         [SerializeField]
         private Unit _enemy;
+
+        public Unit Enemy
+        {
+            get { return _enemy; }
+        }
     }
 }
