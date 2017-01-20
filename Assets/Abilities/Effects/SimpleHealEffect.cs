@@ -2,14 +2,14 @@
 
 namespace Assets.Abilities.Effects
 {
-    public class SimpleDamageEffect : Effect
+    public class SimpleHealEffect : Effect
     {
         [SerializeField]
-        private int _damage;
+        private int _amount;
 
         protected override void AddEffect()
         {
-            Target.GetDamage(_damage);
+            Target.GetHeal(_amount);
         }
 
         protected override void RemoveEffect()

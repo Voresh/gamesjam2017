@@ -8,7 +8,7 @@ namespace Assets.Abilities.Effects
         [SerializeField]
         private int _turnsDuration = 1;
         [SerializeField]
-        protected Unit _target;
+        protected Unit Target;
 
         public void Apply()
         {
