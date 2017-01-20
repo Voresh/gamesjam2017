@@ -20,7 +20,6 @@ namespace Assets.Main
         [Header("temp")]
         [SerializeField]
         private List<Effect> _turnEffects = new List<Effect>();
-        [SerializeField]
         private List<Effect> _endedEffects = new List<Effect>();
 
         public void Awake ()
@@ -34,9 +33,10 @@ namespace Assets.Main
 		
         }
 
-        public void AddEffect(Effect effect)
+        public void AddEffect(GameObject effect)
         {
-            _turnEffects.Add(effect);
+            Effect newEffect = Instantiate(effect).GetComponent<Effect>();
+            _turnEffects.Add(newEffect);
         }
 
         public void NextTurn()

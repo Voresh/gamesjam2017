@@ -14,7 +14,7 @@ namespace Assets.Abilities.Effects
 
         protected override void RemoveEffect()
         {
-
+            Destroy(gameObject);
         }
     }
 }
