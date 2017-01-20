@@ -9,6 +9,13 @@ namespace Assets.Abilities
         [SerializeField]
         private GameObject[] _effectsTemplates;
         private List<Effect> _effects = new List<Effect>();
+        private bool selected = false;
+
+        public bool Selected
+        {
+            get { return selected; }
+            set { selected = value; }
+        }
 
         public List<Effect> Effects
         {
@@ -23,14 +30,22 @@ namespace Assets.Abilities
             }
         }
 
-        public void SelectAbility()
+        public void DestroyUnusedEffects()
         {
-
-        }
-
-        public void DeselectAbility()
-        {
-
+            foreach (var effect in _effects)
+            {
+                if (Selected)
+                {
+                    if (effect.RemoveEffectIfEnded())
+                    {
+                        Destroy(effect.gameObject);
+                    }
+                }
+                else
+                {
+                    Destroy(effect.gameObject);
+                }
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Assets.Main
         {
             Current = this;
             _currentLevel = _levels[0];
+            AbilityManager.current.CreateNewAbilities();
         }
 
         public void AddAbility(Ability ability)
@@ -37,22 +38,13 @@ namespace Assets.Main
             if (!AbilityContains(ability))
             {
                 _turnAbilities.Add(ability);
+                ability.Selected = true;
             }
         }
 
         public bool AbilityContains(Ability ability)
         {
             return Enumerable.Contains(_turnAbilities, ability);
-            /*
-            foreach (var currentAbility in _turnAbilities)
-            {
-                if (currentAbility.Equals(ability))
-                {
-                    return true;
-                }
-            }
-            return false;
-            */
         }
 
         public void NextTurn()
@@ -65,6 +57,7 @@ namespace Assets.Main
             }
             //!!!
             EnemyEndedTurn();
+            AbilityManager.current.CreateNewAbilities();
         }
 
         private void AddEffectsFromAbilities()
