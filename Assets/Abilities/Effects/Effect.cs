@@ -10,11 +10,13 @@ namespace Assets.Abilities.Effects
         [SerializeField]
         protected Unit Target;
         [SerializeField]
-        protected bool _added;
+        private bool _added;
+        [SerializeField]
+        private bool _repeatable;
 
         public void Apply()
         {
-            if (!_added)
+            if (!_added || _repeatable)
             {
                 AddEffect();
                 _added = true;
