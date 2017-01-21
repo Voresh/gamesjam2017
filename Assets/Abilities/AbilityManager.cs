@@ -12,6 +12,12 @@ namespace Assets.Abilities
         [SerializeField]
         private Vector3[] _abilitiesPlaces;
         private List<Ability> _currentAbilities = new List<Ability>();
+
+        public List<Ability> CurrentAbilities
+        {
+            get { return _currentAbilities; }
+        }
+
         [SerializeField]
         private Ability _selectedAbility;
 

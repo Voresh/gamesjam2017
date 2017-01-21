@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Abilities;
 using Assets.Abilities.Effects;
+using Assets.AI.MuseAI;
 using Assets.Units;
 using UnityEngine;
 
@@ -24,12 +25,12 @@ namespace Assets.Main
 
         [SerializeField]
         private AbilityManager _heroAbilityManager;
-
         [SerializeField]
         private AbilityManager _museAbilityManager;
-
         [SerializeField]
         private EnemyAbilityManager _enemyAbilityManager;
+
+        [SerializeField] private MuseAIControler _museAiControler;
 
         public void Awake ()
         {
@@ -47,6 +48,9 @@ namespace Assets.Main
 
         public void NextTurn()
         {
+            //get muse ability here by random
+            _museAiControler.SortAbilitiesByChanseDecrease();
+
             AddEffectsFromAbilities();
 
             foreach (var effect in _turnEffects)
@@ -56,6 +60,15 @@ namespace Assets.Main
             //!!!
             EnemyEndedTurn();
             CreateNewAbilities();
+        }
+
+        private void RandomiseMuseAbility()
+        {
+            if (_museAbilityManager.SelectedAbility != null)
+            {
+                int choise = Random.Range(0, 100);
+
+            }
         }
 
         private void AddEffectsFromAbilities()
