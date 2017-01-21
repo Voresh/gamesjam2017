@@ -40,7 +40,7 @@ namespace Assets.Abilities
             {
                 _chance = value;
                 if (_chanceText != null)
-                    _chanceText.text = _desire.ToString();
+                    _chanceText.text = _chance.ToString();
             }
         }
 
