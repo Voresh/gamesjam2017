@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Assets.Abilities;
 using Assets.Abilities.Effects;
 using Assets.Units;
@@ -29,6 +28,9 @@ namespace Assets.Main
         [SerializeField]
         private AbilityManager _museAbilityManager;
 
+        [SerializeField]
+        private EnemyAbilityManager _enemyAbilityManager;
+
         public void Awake ()
         {
             Current = this;
@@ -40,6 +42,7 @@ namespace Assets.Main
         {
             _museAbilityManager.CreateNewAbilities();
             _heroAbilityManager.CreateNewAbilities();
+            _enemyAbilityManager.CreateRandomAbility();
         }
 
         public void NextTurn()
@@ -68,6 +71,14 @@ namespace Assets.Main
             if (_museAbilityManager.SelectedAbility != null)
             {
                 foreach (var effect in _museAbilityManager.SelectedAbility.Effects)
+                {
+                    _turnEffects.Add(effect);
+                }
+            }
+
+            if (_enemyAbilityManager.SelectedAbility != null)
+            {
+                foreach (var effect in _enemyAbilityManager.SelectedAbility.Effects)
                 {
                     _turnEffects.Add(effect);
                 }
