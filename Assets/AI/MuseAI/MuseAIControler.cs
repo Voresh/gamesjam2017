@@ -10,6 +10,8 @@ namespace Assets.AI.MuseAI
         [SerializeField]
         private AbilityManager _abilityManager;
         private AbilityByChance _abilityByChance = new AbilityByChance();
+        [SerializeField]
+        private int _playerSelectionChance = 70;
 
         public void SortAbilitiesByChanseDecrease(List<Ability> abilities)
         {
@@ -18,20 +20,40 @@ namespace Assets.AI.MuseAI
 
         public Ability GetMuseChoose(Ability playerSelection, List<Ability> abilities)
         {
-            SortAbilitiesByChanseDecrease(abilities);
-            int randomNumber = Random.Range(0, 100);
-            if (randomNumber > 0 && randomNumber < abilities[0].Chance)
+            if (playerSelection != null)
             {
-                return abilities[0];
+                //recount chances
+                int chanceSum = 0;
+                foreach (var ability in abilities)
+                {
+                    chanceSum += ability.Chance;
+                }
+                chanceSum -= playerSelection.Chance;
+                foreach (var ability in abilities)
+                {
+                    ability.Chance = (100 - _playerSelectionChance) * (ability.Chance / chanceSum);
+                }
+                playerSelection.Chance = _playerSelectionChance;
+
             }
+            SortAbilitiesByChanseDecrease(abilities);
+            foreach (var ability in abilities)
+            {
+                Debug.Log(ability.Chance);
+            }
+            int randomNumber = Random.Range(0, 100);
+            Debug.Log(randomNumber);
+            Debug.Log(0 + " " + abilities[0].Chance);
+
             for (int i = 1; i < abilities.Count; i++)
             {
-                if (randomNumber > abilities[i-1].Chance && randomNumber < abilities[i].Chance)
+                Debug.Log(abilities[i-1].Chance + " " + abilities[i].Chance);
+                if (randomNumber >= 0 && randomNumber <= abilities[i].Chance)
                 {
-                    return abilities[i];
+                    return abilities[0];
                 }
             }
-            return null;
+            return abilities[abilities.Count-1];
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Assets.Main
         {
             if (x.Chance > y.Chance)
             {
-                return -1;
+                return 1;
             }
 
             if (x.Chance < y.Chance)
             {
-                return 1;
+                return -1;
             }
 
             return 0;
