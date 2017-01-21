@@ -169,6 +169,11 @@ namespace Assets.Main
             _aggroSlider.value += amount;
         }
 
+        public int GetAggroValue()
+        {
+            return (int) _aggroSlider.value * 100;
+        }
+
         #endregion
 
         #region other
