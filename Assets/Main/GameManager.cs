@@ -161,12 +161,12 @@ namespace Assets.Main
 
         public void IncreaseHeroAggro(int amount)
         {
-            _aggroSlider.value -= amount;
+            _aggroSlider.value -= amount/100f;
         }
 
         public void IncreaseMuseAggro(int amount)
         {
-            _aggroSlider.value += amount;
+            _aggroSlider.value += amount/100f;
         }
 
         public int GetAggroValue()
