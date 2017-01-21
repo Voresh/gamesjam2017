@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Abilities
@@ -7,14 +6,19 @@ namespace Assets.Abilities
     public class AbilityManager : MonoBehaviour
     {
         [SerializeField]
-        private Transform canvas;
+        private Transform _canvas;
         [SerializeField]
         private GameObject[] _abilitiesTemplates;
         [SerializeField]
         private Vector3[] _abilitiesPlaces;
-        [Header("temp")]
-        [SerializeField]
         private List<Ability> _currentAbilities = new List<Ability>();
+        [SerializeField]
+        private Ability _selectedAbility;
+
+        public Ability SelectedAbility
+        {
+            get { return _selectedAbility; }
+        }
 
         public void CreateNewAbilities()
         {
@@ -23,7 +27,7 @@ namespace Assets.Abilities
             {
                 int uniqueId = GetRandomUniqueAbilityId();
                 RectTransform ability = Instantiate(_abilitiesTemplates[uniqueId]).GetComponent<RectTransform>();
-                ability.SetParent(canvas);
+                ability.SetParent(_canvas);
                 ability.anchoredPosition = _abilitiesPlaces[i];
                 _currentAbilities.Add(ability.GetComponent<Ability>());
                 ability.GetComponent<Ability>().CreateEffects();
@@ -60,6 +64,16 @@ namespace Assets.Abilities
                 Destroy(ability.gameObject);
             }
             _currentAbilities.Clear();
+        }
+
+        public void SelectAbility(Ability ability)
+        {
+            if (_selectedAbility != null)
+            {
+                _selectedAbility.Selected = false;
+            }
+            _selectedAbility = ability;
+            _selectedAbility.Selected = true;
         }
     }
 }

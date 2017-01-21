@@ -17,7 +17,7 @@ namespace Assets.Abilities
         }
 
         private List<Effect> _effects = new List<Effect>();
-        private bool selected = false;
+        private bool selected;
 
         public bool Selected
         {
