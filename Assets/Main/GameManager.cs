@@ -4,6 +4,7 @@ using Assets.Abilities.Effects;
 using Assets.AI.MuseAI;
 using Assets.Units;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Main
 {
@@ -29,17 +30,29 @@ namespace Assets.Main
         private AbilityManager _museAbilityManager;
         [SerializeField]
         private EnemyAbilityManager _enemyAbilityManager;
+        [SerializeField]
+        private Slider _emotionsSlider;
 
-        [SerializeField] private MuseAIControler _museAiControler;
+        [SerializeField]
+        private MuseAIControler _museAiControler;
+
+        #region muse penalty
+
+        [SerializeField]
+        private int _penaltyTurnsDuration = 4;
+        private int _currentPenaltyTurnsDuration;
+        private int _afterPenaltyGift = -15;
+
+        #endregion
 
         public void Awake ()
         {
             Current = this;
             _currentLevel = _levels[0];
-            CreateNewAbilities();
+            ResetAbilities();
         }
 
-        private void CreateNewAbilities()
+        private void ResetAbilities()
         {
             _museAbilityManager.CreateNewAbilities();
             _heroAbilityManager.CreateNewAbilities();
@@ -48,25 +61,29 @@ namespace Assets.Main
 
         public void NextTurn()
         {
-            //get muse ability here by random
             _museAbilityManager.SelectAbility(
                 _museAiControler.GetMuseChoose(_museAbilityManager.SelectedAbility, _museAbilityManager.CurrentAbilities));
 
             AddEffectsFromAbilities();
+            ApplyTurnEffects();
+            RemoveUnneededEffects();
+            ResetAbilities();
+            UpdatePosiblePenatlies();
+        }
 
+        private void ApplyTurnEffects()
+        {
             foreach (var effect in _turnEffects)
             {
                 effect.Apply();
             }
-            //!!!
-            EnemyEndedTurn();
-            CreateNewAbilities();
         }
 
         private void AddEffectsFromAbilities()
         {
             if (_heroAbilityManager.SelectedAbility != null)
             {
+                UpdateEmotionsSlider(-_heroAbilityManager.SelectedAbility.Desire);
                 foreach (var effect in _heroAbilityManager.SelectedAbility.Effects)
                 {
                     _turnEffects.Add(effect);
@@ -75,9 +92,13 @@ namespace Assets.Main
 
             if (_museAbilityManager.SelectedAbility != null)
             {
-                foreach (var effect in _museAbilityManager.SelectedAbility.Effects)
+                if (!PenaltyEnabled())
                 {
-                    _turnEffects.Add(effect);
+                    UpdateEmotionsSlider(_museAbilityManager.SelectedAbility.Desire);
+                    foreach (var effect in _museAbilityManager.SelectedAbility.Effects)
+                    {
+                        _turnEffects.Add(effect);
+                    }
                 }
             }
 
@@ -90,7 +111,7 @@ namespace Assets.Main
             }
         }
 
-        public void EnemyEndedTurn()
+        public void RemoveUnneededEffects()
         {
             foreach (var effect in _turnEffects)
             {
@@ -126,5 +147,50 @@ namespace Assets.Main
                 //defeated
             }
         }
+
+        #region other
+
+        private void UpdatePosiblePenatlies()
+        {
+            if (PenaltyEnabled())
+            {
+                if (_currentPenaltyTurnsDuration == 1)
+                {
+                    UpdateEmotionsSlider(_afterPenaltyGift);
+                    Debug.Log("fuck yes");
+                }
+                _currentPenaltyTurnsDuration--;
+            }
+        }
+
+        private void MakePenalty()
+        {
+            if (!PenaltyEnabled())
+            {
+                _currentPenaltyTurnsDuration = _penaltyTurnsDuration;
+            }
+        }
+
+        public bool PenaltyEnabled()
+        {
+            return _currentPenaltyTurnsDuration > 0;
+        }
+
+        #endregion
+
+
+        #region UI
+
+        private void UpdateEmotionsSlider(int emotionsPoints)
+        {
+            _emotionsSlider.value += emotionsPoints/100f;
+            if (_emotionsSlider.value >= 1f)
+            {
+                Debug.Log("fuck off");
+                MakePenalty();
+            }
+        }
+
+        #endregion
     }
 }

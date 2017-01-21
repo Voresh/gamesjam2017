@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Abilities.Effects;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Abilities
 {
@@ -10,6 +11,10 @@ namespace Assets.Abilities
         private GameObject[] _effectsTemplates;
         [SerializeField]
         private int _id;
+        [SerializeField]
+        private Text _chanceText;
+        [SerializeField]
+        private Text _desireText;
 
         [SerializeField]
         private int _chance;
@@ -20,13 +25,23 @@ namespace Assets.Abilities
         public int Desire
         {
             get { return _desire; }
-            set { _desire = value; }
+            set
+            {
+                _desire = value;
+                if (_desireText != null)
+                    _desireText.text = _desire.ToString();
+            }
         }
 
         public int Chance
         {
             get { return _chance; }
-            set { _chance = value; }
+            set
+            {
+                _chance = value;
+                if (_chanceText != null)
+                    _chanceText.text = _desire.ToString();
+            }
         }
 
         public int Id
