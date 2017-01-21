@@ -11,6 +11,24 @@ namespace Assets.Abilities
         [SerializeField]
         private int _id;
 
+        [SerializeField]
+        private int _chance;
+
+        [SerializeField]
+        private int _desire;
+
+        public int Desire
+        {
+            get { return _desire; }
+            set { _desire = value; }
+        }
+
+        public int Chance
+        {
+            get { return _chance; }
+            set { _chance = value; }
+        }
+
         public int Id
         {
             get { return _id; }

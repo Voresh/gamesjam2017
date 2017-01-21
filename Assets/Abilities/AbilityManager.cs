@@ -32,6 +32,28 @@ namespace Assets.Abilities
                 _currentAbilities.Add(ability.GetComponent<Ability>());
                 ability.GetComponent<Ability>().CreateEffects();
             }
+            SetRandomChances();
+            SetDesires();
+        }
+
+        public void SetRandomChances()
+        {
+            int rangeEnd = 100; //percent
+            int i;
+            for (i = 0; i < _currentAbilities.Count - 1; i++)
+            {
+                _currentAbilities[i].Chance = Random.Range(0, rangeEnd);
+                rangeEnd -= _currentAbilities[i].Chance;
+            }
+            _currentAbilities[i].Chance = rangeEnd;
+        }
+
+        public void SetDesires()
+        {
+            foreach (var ability in _currentAbilities)
+            {
+                ability.Desire = (100 - ability.Chance) / 4;
+            }
         }
 
         public int GetRandomUniqueAbilityId()
