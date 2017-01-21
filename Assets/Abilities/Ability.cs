@@ -16,10 +16,10 @@ namespace Assets.Abilities
         [SerializeField]
         private Text _desireText;
 
-        [SerializeField]
+        //[SerializeField]
         private int _chance;
 
-        [SerializeField]
+        //[SerializeField]
         private int _desire;
 
         public int Desire

@@ -2,19 +2,19 @@
 
 namespace Assets.Abilities.Effects
 {
-    public class AddStrengthEffect : Effect
+    public class AddStrengthPercentEffect : Effect
     {
         [SerializeField]
-        private int _amount;
+        private int _percent;
 
         protected override void AddEffect()
         {
-            Target.IncreaseStrength(_amount);
+            Target.IncreasePercentStrength(_percent);
         }
 
         protected override void RemoveEffect()
         {
-            Target.DecreaseStrength(_amount);
+            Target.IncreasePercentStrength(-_percent);
             Destroy(gameObject);
         }
     }

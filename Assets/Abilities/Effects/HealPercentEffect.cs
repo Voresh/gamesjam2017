@@ -2,14 +2,14 @@
 
 namespace Assets.Abilities.Effects
 {
-    public class SimpleHealEffect : Effect
+    public class HealPercentEffect : Effect
     {
         [SerializeField]
-        private int _amount;
+        private int _percent;
 
         protected override void AddEffect()
         {
-            Target.GetHeal(_amount);
+            Target.GetPercentHeal(_percent);
         }
 
         protected override void RemoveEffect()

@@ -10,6 +10,8 @@ namespace Assets.Abilities.Effects
         [SerializeField]
         protected Unit Target;
         [SerializeField]
+        protected Unit Caster;
+        //[SerializeField]
         private bool _added;
         [SerializeField]
         private bool _repeatable;

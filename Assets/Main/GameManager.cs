@@ -45,6 +45,14 @@ namespace Assets.Main
 
         #endregion
 
+
+        #region enemy aggro
+
+        [SerializeField]
+        private Slider _aggroSlider;
+
+        #endregion
+
         public void Awake ()
         {
             Current = this;
@@ -148,6 +156,21 @@ namespace Assets.Main
             }
         }
 
+
+        #region aggro
+
+        public void IncreaseHeroAggro(int amount)
+        {
+            _aggroSlider.value -= amount;
+        }
+
+        public void IncreaseMuseAggro(int amount)
+        {
+            _aggroSlider.value += amount;
+        }
+
+        #endregion
+
         #region other
 
         private void UpdatePosiblePenatlies()
@@ -157,7 +180,7 @@ namespace Assets.Main
                 if (_currentPenaltyTurnsDuration == 1)
                 {
                     UpdateEmotionsSlider(_afterPenaltyGift);
-                    Debug.Log("fuck yes");
+                    //Debug.Log("fuck yes");
                 }
                 _currentPenaltyTurnsDuration--;
             }
@@ -178,7 +201,6 @@ namespace Assets.Main
 
         #endregion
 
-
         #region UI
 
         private void UpdateEmotionsSlider(int emotionsPoints)
@@ -186,7 +208,7 @@ namespace Assets.Main
             _emotionsSlider.value += emotionsPoints/100f;
             if (_emotionsSlider.value >= 1f)
             {
-                Debug.Log("fuck off");
+                //Debug.Log("fuck off");
                 MakePenalty();
             }
         }

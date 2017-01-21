@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Assets.Main;
+﻿using Assets.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +11,15 @@ namespace Assets.Units
         [SerializeField]
         private int _health = 100;
         [SerializeField]
+        private int _maxStrength;
+        [SerializeField]
         private int _strength;
+
+        public int Strength
+        {
+            get { return _strength; }
+        }
+
         [SerializeField]
         private int _magicStrength;
 
@@ -53,14 +60,19 @@ namespace Assets.Units
             UpdateHealthbar();
         }
 
+        public void GetPercentHeal(int percent)
+        {
+            GetHeal(percent * _maxHealth / 100);
+        }
+
         public void IncreaseStrength(int amount)
         {
             _strength += amount;
         }
 
-        public void DecreaseStrength(int amount)
+        public void IncreasePercentStrength(int percent)
         {
-            _strength -= amount;
+            IncreaseStrength(percent * _maxStrength / 100);
         }
 
         public void IncreaseMagicStrength()
