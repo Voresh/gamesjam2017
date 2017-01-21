@@ -6,7 +6,6 @@ namespace Assets.Abilities
 {
     public class AbilityManager : MonoBehaviour
     {
-        public static AbilityManager current;
         [SerializeField]
         private Transform canvas;
         [SerializeField]
@@ -16,11 +15,6 @@ namespace Assets.Abilities
         [Header("temp")]
         [SerializeField]
         private List<Ability> _currentAbilities = new List<Ability>();
-
-        public void Awake()
-        {
-            current = this;
-        }
 
         public void CreateNewAbilities()
         {
@@ -48,7 +42,14 @@ namespace Assets.Abilities
 
         public bool CurrentAbilitiesContains(Ability ability)
         {
-            return Enumerable.Contains(_currentAbilities, ability);
+            foreach (var currAbility in _currentAbilities)
+            {
+                if (currAbility.TheSame(ability.Id))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void RemoveOldAbilities()

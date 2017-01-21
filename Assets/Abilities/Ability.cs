@@ -8,6 +8,14 @@ namespace Assets.Abilities
     {
         [SerializeField]
         private GameObject[] _effectsTemplates;
+        [SerializeField]
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+        }
+
         private List<Effect> _effects = new List<Effect>();
         private bool selected = false;
 
@@ -22,9 +30,9 @@ namespace Assets.Abilities
             get { return _effects; }
         }
 
-        public void Awake()
+        public bool TheSame(int id)
         {
-
+            return _id == id;
         }
 
         public void CreateEffects()

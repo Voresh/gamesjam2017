@@ -21,30 +21,47 @@ namespace Assets.Main
 
         [Header("temp")]
         [SerializeField]
-        private List<Ability> _turnAbilities = new List<Ability>();
+        private List<Ability> _turnHeroAbilities = new List<Ability>();
+        [SerializeField]
+        private List<Ability> _turnMuseAbilities = new List<Ability>();
         [SerializeField]
         private List<Effect> _turnEffects = new List<Effect>();
         private List<Effect> _endedEffects = new List<Effect>();
+
+        [SerializeField]
+        private AbilityManager[] _abilityManagers;
 
         public void Awake ()
         {
             Current = this;
             _currentLevel = _levels[0];
-            AbilityManager.current.CreateNewAbilities();
+            CreateNewAbilities();
         }
 
-        public void AddAbility(Ability ability)
+        private void CreateNewAbilities()
         {
-            if (!AbilityContains(ability))
+            foreach (var abilityManager in _abilityManagers)
             {
-                _turnAbilities.Add(ability);
+                abilityManager.CreateNewAbilities();
+            }
+        }
+
+        public void AddHeroAbility(Ability ability)
+        {
+            if (!Enumerable.Contains(_turnHeroAbilities, ability))
+            {
+                _turnHeroAbilities.Add(ability);
                 ability.Selected = true;
             }
         }
 
-        public bool AbilityContains(Ability ability)
+        public void AddMuseAbility(Ability ability)
         {
-            return Enumerable.Contains(_turnAbilities, ability);
+            if (!Enumerable.Contains(_turnMuseAbilities, ability))
+            {
+                _turnMuseAbilities.Add(ability);
+                ability.Selected = true;
+            }
         }
 
         public void NextTurn()
@@ -57,19 +74,28 @@ namespace Assets.Main
             }
             //!!!
             EnemyEndedTurn();
-            AbilityManager.current.CreateNewAbilities();
+            CreateNewAbilities();
         }
 
         private void AddEffectsFromAbilities()
         {
-            foreach (var ability in _turnAbilities)
+            foreach (var ability in _turnHeroAbilities)
             {
                 foreach (var effect in ability.Effects)
                 {
                     _turnEffects.Add(effect);
                 }
             }
-            _turnAbilities.Clear();
+            _turnHeroAbilities.Clear();
+
+            foreach (var ability in _turnMuseAbilities)
+            {
+                foreach (var effect in ability.Effects)
+                {
+                    _turnEffects.Add(effect);
+                }
+            }
+            _turnMuseAbilities.Clear();
         }
 
         public void EnemyEndedTurn()
