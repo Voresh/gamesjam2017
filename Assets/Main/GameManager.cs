@@ -49,7 +49,8 @@ namespace Assets.Main
         public void NextTurn()
         {
             //get muse ability here by random
-            _museAiControler.SortAbilitiesByChanseDecrease();
+            _museAbilityManager.SelectAbility(
+                _museAiControler.GetMuseChoose(_museAbilityManager.SelectedAbility, _museAbilityManager.CurrentAbilities));
 
             AddEffectsFromAbilities();
 
@@ -60,15 +61,6 @@ namespace Assets.Main
             //!!!
             EnemyEndedTurn();
             CreateNewAbilities();
-        }
-
-        private void RandomiseMuseAbility()
-        {
-            if (_museAbilityManager.SelectedAbility != null)
-            {
-                int choise = Random.Range(0, 100);
-
-            }
         }
 
         private void AddEffectsFromAbilities()
