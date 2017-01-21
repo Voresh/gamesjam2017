@@ -15,6 +15,9 @@ namespace Assets.Abilities
         [SerializeField]
         private Ability _selectedAbility;
 
+        [SerializeField]
+        private AbilityDesireGenerator _abilityDesireGenerator;
+
         public Ability SelectedAbility
         {
             get { return _selectedAbility; }
@@ -33,7 +36,7 @@ namespace Assets.Abilities
                 ability.GetComponent<Ability>().CreateEffects();
             }
             SetRandomChances();
-            SetDesires();
+            _abilityDesireGenerator.GenerateAndSetDesire(_currentAbilities);
         }
 
         public void SetRandomChances()
@@ -46,14 +49,6 @@ namespace Assets.Abilities
                 rangeEnd -= _currentAbilities[i].Chance;
             }
             _currentAbilities[i].Chance = rangeEnd;
-        }
-
-        public void SetDesires()
-        {
-            foreach (var ability in _currentAbilities)
-            {
-                ability.Desire = (100 - ability.Chance) / 4;
-            }
         }
 
         public int GetRandomUniqueAbilityId()
