@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Abilities
 {
@@ -12,6 +13,8 @@ namespace Assets.Abilities
         [SerializeField]
         private Vector3[] _abilitiesPlaces;
         private List<Ability> _currentAbilities = new List<Ability>();
+
+        public Image point;
 
         public List<Ability> CurrentAbilities
         {
@@ -98,6 +101,9 @@ namespace Assets.Abilities
             }
             _selectedAbility = ability;
             _selectedAbility.Selected = true;
+
+            point.transform.position = new Vector3(_selectedAbility.transform.position.x - 115, _selectedAbility.transform.position.y, _selectedAbility.transform.position.z);
+            point.enabled = true;
         }
     }
 }
