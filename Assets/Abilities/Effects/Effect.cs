@@ -1,5 +1,6 @@
 ﻿using Assets.Units;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Abilities.Effects
 {
@@ -15,6 +16,8 @@ namespace Assets.Abilities.Effects
         private bool _added;
         [SerializeField]
         private bool _repeatable;
+        [SerializeField]
+        private Text _valueField;
 
         public void Apply()
         {
@@ -33,6 +36,21 @@ namespace Assets.Abilities.Effects
                 RemoveEffect();
             }
             return Ended();
+        }
+
+        protected void UpdateValueField(int value)
+        {
+            if (_valueField != null)
+            {
+                if (value != 0)
+                {
+                    _valueField.text = value.ToString();
+                }
+                else
+                {
+                    _valueField.text = "-";
+                }
+            }
         }
 
         private bool Ended()

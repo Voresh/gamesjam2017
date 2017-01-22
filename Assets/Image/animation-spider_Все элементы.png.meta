@@ -1,15 +1,14 @@
 fileFormatVersion: 2
-guid: 48eeb668a09eee74ca34965899d617a8
-timeCreated: 1485026802
+guid: b7230ba55e6411f4d88a8f6fe70b13b3
+timeCreated: 1485076470
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: animationSwift 1_0
-    21300002: animationSwift 1_1
-    21300004: animationSwift 1_2
-    21300006: animationSwift 1_3
-    21300008: animationSwift 1_4
-    21300010: animationSwift 1_5
+    21300000: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_0"
+    21300002: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_1"
+    21300004: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_2"
+    21300006: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_3"
+    21300008: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_4"
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -84,80 +83,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animationSwift 1_0
+      name: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_0"
       rect:
         serializedVersion: 2
-        x: 10
-        y: 1045
-        width: 992
-        height: 1003
+        x: 100
+        y: 168
+        width: 416
+        height: 304
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animationSwift 1_1
+      name: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_1"
       rect:
         serializedVersion: 2
-        x: 1045
-        y: 1045
-        width: 977
-        height: 1003
+        x: 576
+        y: 168
+        width: 632
+        height: 638
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animationSwift 1_2
+      name: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_2"
       rect:
         serializedVersion: 2
-        x: 2073
-        y: 1047
-        width: 987
-        height: 1001
+        x: 1319
+        y: 168
+        width: 82
+        height: 721
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animationSwift 1_3
+      name: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_3"
       rect:
         serializedVersion: 2
-        x: 10
-        y: 0
-        width: 992
-        height: 1001
+        x: 1664
+        y: 178
+        width: 108
+        height: 714
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: animationSwift 1_4
+      name: "animation-spider_\u0412\u0441\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B_4"
       rect:
         serializedVersion: 2
-        x: 1046
-        y: 0
-        width: 977
-        height: 1003
+        x: 1820
+        y: 192
+        width: 120
+        height: 348
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: animationSwift 1_5
-      rect:
-        serializedVersion: 2
-        x: 2071
-        y: 0
-        width: 989
-        height: 1003
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

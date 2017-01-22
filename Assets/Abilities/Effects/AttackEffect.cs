@@ -2,6 +2,11 @@
 {
     public class AttackEffect : Effect
     {
+        public void Awake()
+        {
+            UpdateValueField(0);
+        }
+
         protected override void AddEffect()
         {
             Target.GetDamage(Caster.Strength);

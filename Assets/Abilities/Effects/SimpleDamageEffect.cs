@@ -7,6 +7,11 @@ namespace Assets.Abilities.Effects
         [SerializeField]
         private int _damage;
 
+        public void Awake()
+        {
+            UpdateValueField(_damage);
+        }
+
         protected override void AddEffect()
         {
             Target.GetDamage(_damage);

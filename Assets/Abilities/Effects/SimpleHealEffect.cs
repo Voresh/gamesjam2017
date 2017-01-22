@@ -7,6 +7,11 @@ namespace Assets.Abilities.Effects
         [SerializeField]
         private int _amount;
 
+        public void Awake()
+        {
+            UpdateValueField(_amount);
+        }
+
         protected override void AddEffect()
         {
             Target.GetHeal(_amount);
