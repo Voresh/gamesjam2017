@@ -37,6 +37,7 @@ namespace Assets.Abilities
                 int uniqueId = GetRandomUniqueAbilityId();
                 RectTransform ability = Instantiate(_abilitiesTemplates[uniqueId]).GetComponent<RectTransform>();
                 ability.SetParent(_canvas);
+                ability.SetSiblingIndex(6);
                 ability.anchoredPosition = _abilitiesPlaces[i];
                 _currentAbilities.Add(ability.GetComponent<Ability>());
                 ability.GetComponent<Ability>().CreateEffects();

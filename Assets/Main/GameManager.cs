@@ -171,7 +171,7 @@ namespace Assets.Main
 
         public int GetAggroValue()
         {
-            return (int) _aggroSlider.value * 100;
+            return Mathf.FloorToInt(_aggroSlider.value * 100f);
         }
 
         #endregion

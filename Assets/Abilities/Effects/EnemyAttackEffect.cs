@@ -13,7 +13,10 @@ namespace Assets.Abilities.Effects
 
         protected override void AddEffect()
         {
-            if (Random.Range(0, 100) < GameManager.Current.GetAggroValue())
+            int i = Random.Range(0, 100);
+            int aggro = GameManager.Current.GetAggroValue();
+            Debug.Log(i + "   " + aggro);
+            if (i < aggro)
             {
                 Target = _hero;
             }
